@@ -11,7 +11,7 @@ class LaraJsonResponse {
 	public $data;
 	public $error;
 	public $headers = [];
-	public $option;
+	public $options;
 	
 	/**
 	 * LaraJsonResponse constructor.
@@ -98,12 +98,12 @@ class LaraJsonResponse {
 			'message' => $this->message,
 			'data'    => $this->data,
 			'error'   => $this->error,
-		], !is_null($code) ? $code : $this->code, $this->headers, $this->option ?: JSON_UNESCAPED_UNICODE);
+		], !is_null($code) ? $code : $this->code, $this->headers, $this->options ?: JSON_UNESCAPED_UNICODE);
 	}
 	
-	public function setOption(int $option): self
+	public function setOptions(int $options): self
     {
-        $this->option = $option;
+        $this->options = $options;
 
         return $this;
     }
