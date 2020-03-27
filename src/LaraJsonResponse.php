@@ -10,6 +10,8 @@ class LaraJsonResponse {
 	public $code;
 	public $data;
 	public $error;
+	public $headers = [];
+	public $option;
 	
 	/**
 	 * LaraJsonResponse constructor.
@@ -90,12 +92,26 @@ class LaraJsonResponse {
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function globalResponse($code = NULL) {
-		
+
 		return Response::json([
 			'code'    => !is_null($code) ? $code : $this->code,
 			'message' => $this->message,
 			'data'    => $this->data,
 			'error'   => $this->error,
-		], !is_null($code) ? $code : $this->code);
+		], !is_null($code) ? $code : $this->code, $this->headers, $this->option ?: JSON_UNESCAPED_UNICODE);
 	}
+	
+	public function setOption(int $option): self
+    {
+        $this->option = $option;
+
+        return $this;
+    }
+
+    public function setHeaders(array $headers): self
+    {
+        $this->headers = $headers;
+
+        return $this;
+    }
 }
